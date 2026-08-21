@@ -1,7 +1,7 @@
 package com.example.application.payment.service;
 
 import com.example.application.flight.notification.NotificationMessage;
-import com.example.application.flight.notification.NotificationService;
+import com.example.application.flight.notification.FlightNotificationService;
 
 import com.example.application.payment.dto.CreatePaymentRequest;
 import com.example.application.payment.dto.CreatePaymentResponse;
@@ -28,7 +28,7 @@ public class PaymentService {
 
     private final PaymentRepository paymentRepository;
 
-    private final NotificationService notificationService;
+    private final FlightNotificationService notificationService;
 
     @Value("${razorpay.key.id}")
     private String keyId;
@@ -39,7 +39,7 @@ public class PaymentService {
 
     public PaymentService(
             PaymentRepository paymentRepository,
-            NotificationService notificationService
+            FlightNotificationService notificationService
     ) {
         this.paymentRepository = paymentRepository;
         this.notificationService = notificationService;

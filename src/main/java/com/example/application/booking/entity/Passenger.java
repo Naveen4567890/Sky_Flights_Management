@@ -39,4 +39,6 @@ public class Passenger {
     private String phone;
 
     private LocalDate dateOfBirth;
+
+
 }

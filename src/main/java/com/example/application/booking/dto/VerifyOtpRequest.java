@@ -1,4 +1,11 @@
 package com.example.application.booking.dto;
 
-public class VertifyOtpRequest {
+
+import lombok.Data;
+
+@Data
+public class VerifyOtpRequest {
+
+    private String email;
+    private String otp;
 }

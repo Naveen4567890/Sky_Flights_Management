@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.Map;
 
 @Data
 @NoArgsConstructor
@@ -17,7 +18,13 @@ public class CreateBookingRequest {
 
     private List<PassengerRequest> passengers;
 
+    private String onwardSeatNumber;
+
+    private String returnSeatNumber;
+
     private String paymentMethod;
 
     private String paymentId;
+
+
 }

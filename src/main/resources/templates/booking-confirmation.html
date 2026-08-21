@@ -37,7 +37,10 @@
                        overflow: hidden;
                    ">
 
-                <!-- Header -->
+                <!-- ================================================= -->
+                <!-- HEADER -->
+                <!-- ================================================= -->
+
                 <tr>
                     <td style="
                         background-color: #2563eb;
@@ -86,7 +89,10 @@
                 </tr>
 
 
-                <!-- Confirmation Message -->
+                <!-- ================================================= -->
+                <!-- CONFIRMATION MESSAGE -->
+                <!-- ================================================= -->
+
                 <tr>
                     <td style="padding: 30px;">
 
@@ -102,10 +108,12 @@
                             font-size: 15px;
                             line-height: 1.6;
                         ">
+
                             Hello
                             <strong th:text="${booking.passengerName}">
                                 Passenger
                             </strong>,
+
                         </p>
 
                         <p style="
@@ -113,16 +121,21 @@
                             font-size: 15px;
                             line-height: 1.6;
                         ">
+
                             Your flight has been successfully booked.
                             Please find your booking details and flight
                             itinerary below.
+
                         </p>
 
                     </td>
                 </tr>
 
 
-                <!-- PNR Section -->
+                <!-- ================================================= -->
+                <!-- PNR SECTION -->
+                <!-- ================================================= -->
+
                 <tr>
                     <td style="padding: 0 30px 25px;">
 
@@ -154,7 +167,7 @@
                                         font-weight: bold;
                                         letter-spacing: 2px;
                                     "
-                                         th:text="${booking.pnr}">
+                                         th:text="${booking.bookingReference}">
                                         ABC123
                                     </div>
 
@@ -189,7 +202,10 @@
                 </tr>
 
 
-                <!-- Flight Itinerary -->
+                <!-- ================================================= -->
+                <!-- FLIGHT ITINERARY -->
+                <!-- ================================================= -->
+
                 <tr>
                     <td style="padding: 0 30px 25px;">
 
@@ -361,7 +377,10 @@
                 </tr>
 
 
-                <!-- Passenger Details -->
+                <!-- ================================================= -->
+                <!-- PASSENGER DETAILS -->
+                <!-- ================================================= -->
+
                 <tr>
                     <td style="padding: 0 30px 25px;">
 
@@ -426,7 +445,10 @@
                 </tr>
 
 
-                <!-- Seat Details -->
+                <!-- ================================================= -->
+                <!-- SEAT DETAILS -->
+                <!-- ================================================= -->
+
                 <tr>
                     <td style="padding: 0 30px 25px;">
 
@@ -437,44 +459,60 @@
                             💺 Seat & Cabin
                         </h3>
 
+
+                        <!-- ========================================= -->
+                        <!-- DEPARTURE SEAT -->
+                        <!-- ========================================= -->
+
                         <table width="100%"
                                cellpadding="0"
-                               cellspacing="0">
+                               cellspacing="0"
+                               style="
+                                   border: 1px solid #e5e7eb;
+                                   border-radius: 8px;
+                                   margin-bottom: 12px;
+                               ">
 
                             <tr>
 
-                                <td width="50%"
-                                    style="
-                                        background-color: #f9fafb;
-                                        padding: 18px;
-                                    ">
+                                <td style="
+                                    background-color: #eff6ff;
+                                    padding: 18px;
+                                ">
 
                                     <div style="
-                                        color: #6b7280;
+                                        color: #2563eb;
                                         font-size: 12px;
+                                        font-weight: bold;
+                                        text-transform: uppercase;
                                     ">
-                                        SEAT
+                                        Departure Seat
                                     </div>
 
                                     <div style="
-                                        margin-top: 5px;
+                                        margin-top: 6px;
                                         font-size: 20px;
                                         font-weight: bold;
+                                        color: #111827;
                                     "
-                                         th:text="${booking.seatNumber}">
+                                         th:text="${booking.onwardSeatNumber}">
                                         12A
                                     </div>
 
+                                    <div style="
+                                        margin-top: 4px;
+                                        color: #6b7280;
+                                        font-size: 12px;
+                                    ">
+                                        Onward Flight
+                                    </div>
+
                                 </td>
 
 
-                                <td width="10%">
-                                </td>
-
-
-                                <td width="40%"
+                                <td align="right"
                                     style="
-                                        background-color: #f9fafb;
+                                        background-color: #eff6ff;
                                         padding: 18px;
                                     ">
 
@@ -486,11 +524,92 @@
                                     </div>
 
                                     <div style="
-                                        margin-top: 5px;
+                                        margin-top: 6px;
                                         font-size: 16px;
                                         font-weight: bold;
+                                        color: #111827;
                                     "
-                                         th:text="${booking.cabinClass}">
+                                         th:text="${booking.cabin}">
+                                        Economy
+                                    </div>
+
+                                </td>
+
+                            </tr>
+
+                        </table>
+
+
+                        <!-- ========================================= -->
+                        <!-- RETURN SEAT -->
+                        <!-- ========================================= -->
+
+                        <table width="100%"
+                               cellpadding="0"
+                               cellspacing="0"
+                               style="
+                                   border: 1px solid #e5e7eb;
+                                   border-radius: 8px;
+                               "
+                               th:if="${booking.returnSeatNumber != null}">
+
+                            <tr>
+
+                                <td style="
+                                    background-color: #f0fdf4;
+                                    padding: 18px;
+                                ">
+
+                                    <div style="
+                                        color: #16a34a;
+                                        font-size: 12px;
+                                        font-weight: bold;
+                                        text-transform: uppercase;
+                                    ">
+                                        Return Seat
+                                    </div>
+
+                                    <div style="
+                                        margin-top: 6px;
+                                        font-size: 20px;
+                                        font-weight: bold;
+                                        color: #111827;
+                                    "
+                                         th:text="${booking.returnSeatNumber}">
+                                        14C
+                                    </div>
+
+                                    <div style="
+                                        margin-top: 4px;
+                                        color: #6b7280;
+                                        font-size: 12px;
+                                    ">
+                                        Return Flight
+                                    </div>
+
+                                </td>
+
+
+                                <td align="right"
+                                    style="
+                                        background-color: #f0fdf4;
+                                        padding: 18px;
+                                    ">
+
+                                    <div style="
+                                        color: #6b7280;
+                                        font-size: 12px;
+                                    ">
+                                        CABIN
+                                    </div>
+
+                                    <div style="
+                                        margin-top: 6px;
+                                        font-size: 16px;
+                                        font-weight: bold;
+                                        color: #111827;
+                                    "
+                                         th:text="${booking.cabin}">
                                         Economy
                                     </div>
 
@@ -504,7 +623,10 @@
                 </tr>
 
 
-                <!-- Fare -->
+                <!-- ================================================= -->
+                <!-- FARE -->
+                <!-- ================================================= -->
+
                 <tr>
                     <td style="padding: 0 30px 30px;">
 
@@ -551,7 +673,10 @@
                 </tr>
 
 
-                <!-- Footer -->
+                <!-- ================================================= -->
+                <!-- FOOTER -->
+                <!-- ================================================= -->
+
                 <tr>
                     <td style="
                         background-color: #f9fafb;
@@ -587,6 +712,7 @@
 
                     </td>
                 </tr>
+
 
             </table>
 

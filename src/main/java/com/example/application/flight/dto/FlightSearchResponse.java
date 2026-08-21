@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Data
 @Builder
@@ -30,4 +31,6 @@ public class FlightSearchResponse {
     private String cabin;
 
     private Integer availableSeats;
+
+    private LocalDate travelDate;
 }
