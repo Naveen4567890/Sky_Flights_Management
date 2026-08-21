@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Flight Booking Confirmation</title>
+</head>
+
+<body style="
+    margin: 0;
+    padding: 0;
+    background-color: #f3f6fa;
+    font-family: Arial, Helvetica, sans-serif;
+">
+
+<table width="100%"
+       cellpadding="0"
+       cellspacing="0"
+       style="background-color: #f3f6fa; padding: 30px 0;">
+
+    <tr>
+        <td align="center">
+
+            <!-- Main Container -->
+            <table width="650"
+                   cellpadding="0"
+                   cellspacing="0"
+                   style="
+                       max-width: 650px;
+                       width: 100%;
+                       background-color: #ffffff;
+                       border-radius: 12px;
+                       overflow: hidden;
+                   ">
+
+                <!-- Header -->
+                <tr>
+                    <td style="
+                        background-color: #2563eb;
+                        padding: 25px 30px;
+                        color: white;
+                    ">
+
+                        <table width="100%">
+                            <tr>
+
+                                <td>
+                                    <h1 style="
+                                        margin: 0;
+                                        font-size: 26px;
+                                    ">
+                                        ✈ Sky Flights
+                                    </h1>
+
+                                    <p style="
+                                        margin: 6px 0 0;
+                                        font-size: 14px;
+                                    ">
+                                        Your journey starts here
+                                    </p>
+                                </td>
+
+                                <td align="right">
+
+                                    <div style="
+                                        background-color: #ffffff;
+                                        color: #2563eb;
+                                        padding: 8px 14px;
+                                        border-radius: 20px;
+                                        font-weight: bold;
+                                        font-size: 13px;
+                                    ">
+                                        CONFIRMED
+                                    </div>
+
+                                </td>
+
+                            </tr>
+                        </table>
+
+                    </td>
+                </tr>
+
+
+                <!-- Confirmation Message -->
+                <tr>
+                    <td style="padding: 30px;">
+
+                        <h2 style="
+                            margin: 0 0 10px;
+                            color: #111827;
+                        ">
+                            Booking Confirmed! 🎉
+                        </h2>
+
+                        <p style="
+                            color: #4b5563;
+                            font-size: 15px;
+                            line-height: 1.6;
+                        ">
+                            Hello
+                            <strong th:text="${booking.passengerName}">
+                                Passenger
+                            </strong>,
+                        </p>
+
+                        <p style="
+                            color: #4b5563;
+                            font-size: 15px;
+                            line-height: 1.6;
+                        ">
+                            Your flight has been successfully booked.
+                            Please find your booking details and flight
+                            itinerary below.
+                        </p>
+
+                    </td>
+                </tr>
+
+
+                <!-- PNR Section -->
+                <tr>
+                    <td style="padding: 0 30px 25px;">
+
+                        <table width="100%"
+                               cellpadding="0"
+                               cellspacing="0"
+                               style="
+                                   background-color: #eff6ff;
+                                   border: 1px solid #bfdbfe;
+                                   border-radius: 8px;
+                               ">
+
+                            <tr>
+
+                                <td style="padding: 18px;">
+
+                                    <div style="
+                                        color: #6b7280;
+                                        font-size: 12px;
+                                        text-transform: uppercase;
+                                    ">
+                                        Booking Reference / PNR
+                                    </div>
+
+                                    <div style="
+                                        margin-top: 6px;
+                                        color: #1d4ed8;
+                                        font-size: 24px;
+                                        font-weight: bold;
+                                        letter-spacing: 2px;
+                                    "
+                                         th:text="${booking.pnr}">
+                                        ABC123
+                                    </div>
+
+                                </td>
+
+                                <td align="right"
+                                    style="padding: 18px;">
+
+                                    <div style="
+                                        color: #6b7280;
+                                        font-size: 12px;
+                                    ">
+                                        Booking ID
+                                    </div>
+
+                                    <div style="
+                                        margin-top: 6px;
+                                        font-weight: bold;
+                                        color: #111827;
+                                    "
+                                         th:text="${booking.bookingId}">
+                                        10001
+                                    </div>
+
+                                </td>
+
+                            </tr>
+
+                        </table>
+
+                    </td>
+                </tr>
+
+
+                <!-- Flight Itinerary -->
+                <tr>
+                    <td style="padding: 0 30px 25px;">
+
+                        <h3 style="
+                            color: #111827;
+                            margin-bottom: 15px;
+                        ">
+                            ✈ Flight Itinerary
+                        </h3>
+
+                        <table width="100%"
+                               cellpadding="0"
+                               cellspacing="0"
+                               style="
+                                   border: 1px solid #e5e7eb;
+                                   border-radius: 8px;
+                               ">
+
+                            <!-- Airline -->
+                            <tr>
+
+                                <td colspan="3"
+                                    style="
+                                        padding: 18px;
+                                        border-bottom: 1px solid #e5e7eb;
+                                    ">
+
+                                    <strong
+                                            th:text="${booking.airline}">
+                                        Air India
+                                    </strong>
+
+                                    <span style="
+                                        color: #6b7280;
+                                        margin-left: 10px;
+                                    "
+                                          th:text="${booking.flightNumber}">
+                                        AI-202
+                                    </span>
+
+                                </td>
+
+                            </tr>
+
+
+                            <!-- Route -->
+                            <tr>
+
+                                <td width="35%"
+                                    style="padding: 20px;">
+
+                                    <div style="
+                                        font-size: 26px;
+                                        font-weight: bold;
+                                        color: #111827;
+                                    "
+                                         th:text="${booking.source}">
+                                        MAA
+                                    </div>
+
+                                    <div style="
+                                        margin-top: 5px;
+                                        color: #6b7280;
+                                    ">
+                                        Departure
+                                    </div>
+
+                                    <div style="
+                                        margin-top: 5px;
+                                        font-size: 13px;
+                                        color: #6b7280;
+                                    "
+                                         th:text="${booking.departureTime}">
+                                        10:30 AM
+                                    </div>
+
+                                </td>
+
+
+                                <td width="30%"
+                                    align="center"
+                                    style="padding: 20px;">
+
+                                    <div style="
+                                        color: #2563eb;
+                                        font-size: 24px;
+                                    ">
+                                        ✈
+                                    </div>
+
+                                    <div style="
+                                        border-top: 1px dashed #9ca3af;
+                                        margin-top: 8px;
+                                    ">
+                                    </div>
+
+                                    <div style="
+                                        color: #6b7280;
+                                        font-size: 12px;
+                                        margin-top: 6px;
+                                    ">
+                                        Flight
+                                    </div>
+
+                                </td>
+
+
+                                <td width="35%"
+                                    align="right"
+                                    style="padding: 20px;">
+
+                                    <div style="
+                                        font-size: 26px;
+                                        font-weight: bold;
+                                        color: #111827;
+                                    "
+                                         th:text="${booking.destination}">
+                                        DEL
+                                    </div>
+
+                                    <div style="
+                                        margin-top: 5px;
+                                        color: #6b7280;
+                                    ">
+                                        Arrival
+                                    </div>
+
+                                    <div style="
+                                        margin-top: 5px;
+                                        font-size: 13px;
+                                        color: #6b7280;
+                                    "
+                                         th:text="${booking.arrivalTime}">
+                                        01:20 PM
+                                    </div>
+
+                                </td>
+
+                            </tr>
+
+
+                            <!-- Travel Date -->
+                            <tr>
+
+                                <td colspan="3"
+                                    style="
+                                        padding: 15px 20px;
+                                        background-color: #f9fafb;
+                                        border-top: 1px solid #e5e7eb;
+                                    ">
+
+                                    <strong>
+                                        Travel Date:
+                                    </strong>
+
+                                    <span
+                                            th:text="${booking.travelDate}"
+                                            style="margin-left: 8px;">
+                                        25 Aug 2026
+                                    </span>
+
+                                </td>
+
+                            </tr>
+
+                        </table>
+
+                    </td>
+                </tr>
+
+
+                <!-- Passenger Details -->
+                <tr>
+                    <td style="padding: 0 30px 25px;">
+
+                        <h3 style="
+                            color: #111827;
+                            margin-bottom: 15px;
+                        ">
+                            👤 Passenger Details
+                        </h3>
+
+                        <table width="100%"
+                               cellpadding="10"
+                               cellspacing="0"
+                               style="
+                                   border: 1px solid #e5e7eb;
+                                   border-radius: 8px;
+                               ">
+
+                            <tr>
+
+                                <td style="color: #6b7280;">
+                                    Passenger Name
+                                </td>
+
+                                <td align="right"
+                                    style="font-weight: bold;"
+                                    th:text="${booking.passengerName}">
+                                    Naveen
+                                </td>
+
+                            </tr>
+
+                            <tr>
+
+                                <td style="color: #6b7280;">
+                                    Email
+                                </td>
+
+                                <td align="right"
+                                    th:text="${booking.email}">
+                                    naveen@gmail.com
+                                </td>
+
+                            </tr>
+
+                            <tr>
+
+                                <td style="color: #6b7280;">
+                                    Phone
+                                </td>
+
+                                <td align="right"
+                                    th:text="${booking.phone}">
+                                    +919876543210
+                                </td>
+
+                            </tr>
+
+                        </table>
+
+                    </td>
+                </tr>
+
+
+                <!-- Seat Details -->
+                <tr>
+                    <td style="padding: 0 30px 25px;">
+
+                        <h3 style="
+                            color: #111827;
+                            margin-bottom: 15px;
+                        ">
+                            💺 Seat & Cabin
+                        </h3>
+
+                        <table width="100%"
+                               cellpadding="0"
+                               cellspacing="0">
+
+                            <tr>
+
+                                <td width="50%"
+                                    style="
+                                        background-color: #f9fafb;
+                                        padding: 18px;
+                                    ">
+
+                                    <div style="
+                                        color: #6b7280;
+                                        font-size: 12px;
+                                    ">
+                                        SEAT
+                                    </div>
+
+                                    <div style="
+                                        margin-top: 5px;
+                                        font-size: 20px;
+                                        font-weight: bold;
+                                    "
+                                         th:text="${booking.seatNumber}">
+                                        12A
+                                    </div>
+
+                                </td>
+
+
+                                <td width="10%">
+                                </td>
+
+
+                                <td width="40%"
+                                    style="
+                                        background-color: #f9fafb;
+                                        padding: 18px;
+                                    ">
+
+                                    <div style="
+                                        color: #6b7280;
+                                        font-size: 12px;
+                                    ">
+                                        CABIN
+                                    </div>
+
+                                    <div style="
+                                        margin-top: 5px;
+                                        font-size: 16px;
+                                        font-weight: bold;
+                                    "
+                                         th:text="${booking.cabinClass}">
+                                        Economy
+                                    </div>
+
+                                </td>
+
+                            </tr>
+
+                        </table>
+
+                    </td>
+                </tr>
+
+
+                <!-- Fare -->
+                <tr>
+                    <td style="padding: 0 30px 30px;">
+
+                        <h3 style="
+                            color: #111827;
+                            margin-bottom: 15px;
+                        ">
+                            💳 Fare Details
+                        </h3>
+
+                        <table width="100%"
+                               cellpadding="12"
+                               cellspacing="0"
+                               style="
+                                   border: 1px solid #e5e7eb;
+                                   border-radius: 8px;
+                               ">
+
+                            <tr>
+
+                                <td style="color: #6b7280;">
+                                    Total Amount Paid
+                                </td>
+
+                                <td align="right"
+                                    style="
+                                        font-size: 22px;
+                                        font-weight: bold;
+                                        color: #16a34a;
+                                    ">
+
+                                    ₹<span
+                                        th:text="${booking.totalAmount}">
+                                        5500
+                                    </span>
+
+                                </td>
+
+                            </tr>
+
+                        </table>
+
+                    </td>
+                </tr>
+
+
+                <!-- Footer -->
+                <tr>
+                    <td style="
+                        background-color: #f9fafb;
+                        padding: 25px 30px;
+                        text-align: center;
+                    ">
+
+                        <p style="
+                            margin: 0;
+                            color: #374151;
+                            font-size: 14px;
+                        ">
+                            Thank you for choosing
+                            <strong>Sky Flights</strong>.
+                        </p>
+
+                        <p style="
+                            margin: 8px 0 0;
+                            color: #9ca3af;
+                            font-size: 12px;
+                        ">
+                            Please keep this email for your records.
+                        </p>
+
+                        <p style="
+                            margin: 15px 0 0;
+                            color: #9ca3af;
+                            font-size: 11px;
+                        ">
+                            This is an automated email.
+                            Please do not reply.
+                        </p>
+
+                    </td>
+                </tr>
+
+            </table>
+
+        </td>
+    </tr>
+
+</table>
+
+</body>
+</html>
