@@ -1,11 +1,7 @@
 package com.example.application.booking.entity;
 
 import jakarta.persistence.*;
-
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 
@@ -15,30 +11,40 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 public class Passenger {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
             name = "booking_id",
             nullable = false
     )
     private Booking booking;
 
-
+    @Column(nullable = false)
     private String firstName;
 
+    @Column(nullable = false)
     private String lastName;
+
+    private String gender;
+
+    private LocalDate dateOfBirth;
 
     private String email;
 
     private String phone;
 
-    private LocalDate dateOfBirth;
+    // Onward flight seat
+    @Column(nullable = false)
+    private String onwardSeatNumber;
 
+    // Return flight seat - null for one-way
+    private String returnSeatNumber;
 
+    private String cabin;
 }

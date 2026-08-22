@@ -20,4 +20,10 @@ public class PassengerRequest {
     private String phone;
 
     private LocalDate dateOfBirth;
+
+    private String onwardSeatNumber;
+
+    private String returnSeatNumber;
+
+    private String cabin;
 }

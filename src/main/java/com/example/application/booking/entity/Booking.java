@@ -1,9 +1,7 @@
 package com.example.application.booking.entity;
 
 import com.example.application.flight.entity.Flight;
-
 import jakarta.persistence.*;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,6 +9,8 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "bookings")
@@ -24,44 +24,68 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     @Column(
             unique = true,
             nullable = false
     )
     private String bookingReference;
 
-
-    @ManyToOne
+    // Onward flight
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
             name = "onward_flight_id",
             nullable = false
     )
     private Flight onwardFlight;
 
-
-    @ManyToOne
+    // Return flight - nullable for one-way bookings
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
             name = "return_flight_id"
     )
     private Flight returnFlight;
 
-
+    // Number of passengers
+    @Column(nullable = false)
     private Integer passengerCount;
 
-
+    // Total booking amount
     @Column(
             precision = 12,
             scale = 2
     )
     private BigDecimal totalAmount;
 
-
+    // Payment details
     private String paymentMethod;
 
     private String paymentId;
 
+    // BOOKED, CONFIRMED, CANCELLED, PENDING, etc.
+    @Column(nullable = false)
     private String status;
 
+    // Booking creation date/time
+    @Column(nullable = false)
     private LocalDateTime bookingDate;
+
+    // Passengers belonging to this booking
+    @OneToMany(
+            mappedBy = "booking",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Passenger> passengers = new ArrayList<>();
+
+    // Add passenger
+    public void addPassenger(Passenger passenger) {
+        passengers.add(passenger);
+        passenger.setBooking(this);
+    }
+
+    // Remove passenger
+    public void removePassenger(Passenger passenger) {
+        passengers.remove(passenger);
+        passenger.setBooking(null);
+    }
 }

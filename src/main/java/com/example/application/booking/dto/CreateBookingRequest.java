@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -18,13 +19,11 @@ public class CreateBookingRequest {
 
     private List<PassengerRequest> passengers;
 
-    private String onwardSeatNumber;
-
-    private String returnSeatNumber;
-
     private String paymentMethod;
 
     private String paymentId;
+
+    private BigDecimal totalAmount;
 
 
 }
