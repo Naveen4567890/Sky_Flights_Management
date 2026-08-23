@@ -640,6 +640,7 @@
                 </tr>
 
 
+
                 <!-- ================================================= -->
                 <!-- PASSENGER DETAILS -->
                 <!-- ================================================= -->
@@ -649,63 +650,213 @@
                     <td style="padding: 0 30px 25px;">
 
                         <h3 style="
-                            color: #111827;
-                            margin: 0 0 15px;
-                            font-size: 18px;
-                        ">
+            color: #111827;
+            margin: 0 0 15px;
+            font-size: 18px;
+        ">
                             👤 Passenger Details
                         </h3>
 
+
+                        <!-- Passenger Count -->
+
+                        <div style="
+            margin-bottom: 12px;
+            padding: 10px 14px;
+            background-color: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            color: #374151;
+            font-size: 13px;
+        ">
+
+                            <strong>
+                                Total Passengers:
+                            </strong>
+
+                            <span
+                                    th:text="${#lists.size(booking.passengers)}"
+                                    style="
+                        margin-left: 6px;
+                        color: #2563eb;
+                        font-weight: bold;
+                    ">
+                2
+            </span>
+
+                        </div>
+
+
+                        <!-- Passenger Table -->
 
                         <table width="100%"
                                cellpadding="10"
                                cellspacing="0"
                                border="0"
                                style="
-                                   border: 1px solid #e5e7eb;
-                                   border-radius: 8px;
-                               ">
+                   border: 1px solid #e5e7eb;
+                   border-radius: 8px;
+                   overflow: hidden;
+               ">
 
-                            <tr>
+                            <!-- TABLE HEADER -->
 
-                                <td style="color: #6b7280;">
-                                    Passenger Name
-                                </td>
+                            <tr style="
+                background-color: #eff6ff;
+            ">
 
-                                <td align="right"
-                                    style="font-weight: bold; color: #111827;"
-                                    th:text="${booking.passengerName}">
-                                    G Naveen
-                                </td>
+                                <th align="left"
+                                    style="
+                        color: #374151;
+                        font-size: 12px;
+                    ">
+                                    Passenger
+                                </th>
 
-                            </tr>
 
-
-                            <tr>
-
-                                <td style="color: #6b7280;">
+                                <th align="left"
+                                    style="
+                        color: #374151;
+                        font-size: 12px;
+                    ">
                                     Email
-                                </td>
-
-                                <td align="right"
-                                    style="color: #374151;"
-                                    th:text="${booking.email}">
-                                    naveen@gmail.com
-                                </td>
-
-                            </tr>
+                                </th>
 
 
-                            <tr>
-
-                                <td style="color: #6b7280;">
+                                <th align="left"
+                                    style="
+                        color: #374151;
+                        font-size: 12px;
+                    ">
                                     Phone
+                                </th>
+
+
+                                <th align="center"
+                                    style="
+                        color: #374151;
+                        font-size: 12px;
+                    ">
+                                    Cabin
+                                </th>
+
+
+                                <th align="center"
+                                    style="
+                        color: #374151;
+                        font-size: 12px;
+                    ">
+                                    Onward Seat
+                                </th>
+
+
+                                <th align="center"
+                                    style="
+                        color: #374151;
+                        font-size: 12px;
+                    ">
+                                    Return Seat
+                                </th>
+
+                            </tr>
+
+
+                            <!-- PASSENGER ROWS -->
+
+                            <tr th:each="passenger, passengerStat : ${booking.passengers}"
+                                th:style="${passengerStat.index % 2 == 0}
+                    ? 'background-color: #ffffff;'
+                    : 'background-color: #f9fafb;'">
+
+                                <!-- Passenger Name -->
+
+                                <td style="
+                    color: #111827;
+                    font-size: 13px;
+                ">
+
+                                    <strong
+                                            th:text="${passenger.firstName + ' ' + passenger.lastName}">
+                                        Rakesh Kumar
+                                    </strong>
+
                                 </td>
 
-                                <td align="right"
-                                    style="color: #374151;"
-                                    th:text="${booking.phone}">
+
+                                <!-- Email -->
+
+                                <td style="
+                    color: #374151;
+                    font-size: 12px;
+                "
+                                    th:text="${passenger.email}">
+
+                                    rakesh@gmail.com
+
+                                </td>
+
+
+                                <!-- Phone -->
+
+                                <td style="
+                    color: #374151;
+                    font-size: 12px;
+                "
+                                    th:text="${passenger.phone}">
+
                                     +919876543210
+
+                                </td>
+
+
+                                <!-- Cabin -->
+
+                                <td align="center"
+                                    style="
+                        font-size: 12px;
+                        font-weight: bold;
+                        color: #7c3aed;
+                    "
+                                    th:text="${passenger.cabin != null
+                        ? passenger.cabin
+                        : 'Economy'}">
+
+                                    Economy
+
+                                </td>
+
+
+                                <!-- Onward Seat -->
+
+                                <td align="center"
+                                    style="
+                        font-size: 13px;
+                        font-weight: bold;
+                        color: #2563eb;
+                    "
+                                    th:text="${passenger.onwardSeatNumber != null
+                        ? passenger.onwardSeatNumber
+                        : '-'}">
+
+                                    12A
+
+                                </td>
+
+
+                                <!-- Return Seat -->
+
+                                <td align="center"
+                                    style="
+                        font-size: 13px;
+                        font-weight: bold;
+                        color: #16a34a;
+                    "
+                                    th:text="${passenger.returnSeatNumber != null
+                        ? passenger.returnSeatNumber
+                        : '-'}">
+
+                                    12B
+
                                 </td>
 
                             </tr>
@@ -716,188 +867,6 @@
 
                 </tr>
 
-
-                <!-- ================================================= -->
-                <!-- SEAT DETAILS -->
-                <!-- ================================================= -->
-
-                <tr>
-
-                    <td style="padding: 0 30px 25px;">
-
-                        <h3 style="
-                            color: #111827;
-                            margin: 0 0 15px;
-                            font-size: 18px;
-                        ">
-                            💺 Seat & Cabin
-                        </h3>
-
-
-                        <!-- ================================================= -->
-                        <!-- ONWARD SEAT -->
-                        <!-- ================================================= -->
-
-                        <table width="100%"
-                               cellpadding="0"
-                               cellspacing="0"
-                               border="0"
-                               style="
-                                   border: 1px solid #e5e7eb;
-                                   border-radius: 8px;
-                                   margin-bottom: 12px;
-                               ">
-
-                            <tr>
-
-                                <td style="
-                                    background-color: #eff6ff;
-                                    padding: 18px;
-                                ">
-
-                                    <div style="
-                                        color: #2563eb;
-                                        font-size: 12px;
-                                        font-weight: bold;
-                                        text-transform: uppercase;
-                                    ">
-                                        Departure Seat
-                                    </div>
-
-                                    <div style="
-                                        margin-top: 6px;
-                                        font-size: 20px;
-                                        font-weight: bold;
-                                        color: #111827;
-                                    "
-                                         th:text="${booking.onwardSeatNumber}">
-                                        F1
-                                    </div>
-
-                                    <div style="
-                                        margin-top: 4px;
-                                        color: #6b7280;
-                                        font-size: 12px;
-                                    ">
-                                        Onward Flight
-                                    </div>
-
-                                </td>
-
-
-                                <td align="right"
-                                    style="
-                                        background-color: #eff6ff;
-                                        padding: 18px;
-                                    ">
-
-                                    <div style="
-                                        color: #6b7280;
-                                        font-size: 12px;
-                                    ">
-                                        CABIN
-                                    </div>
-
-                                    <div style="
-                                        margin-top: 6px;
-                                        font-size: 16px;
-                                        font-weight: bold;
-                                        color: #111827;
-                                    "
-                                         th:text="${booking.cabin}">
-                                        Economy
-                                    </div>
-
-                                </td>
-
-                            </tr>
-
-                        </table>
-
-
-                        <!-- ================================================= -->
-                        <!-- RETURN SEAT -->
-                        <!-- ================================================= -->
-
-                        <table width="100%"
-                               cellpadding="0"
-                               cellspacing="0"
-                               border="0"
-                               style="
-                                   border: 1px solid #e5e7eb;
-                                   border-radius: 8px;
-                               "
-                               th:if="${booking.returnSeatNumber != null}">
-
-                            <tr>
-
-                                <td style="
-                                    background-color: #f0fdf4;
-                                    padding: 18px;
-                                ">
-
-                                    <div style="
-                                        color: #16a34a;
-                                        font-size: 12px;
-                                        font-weight: bold;
-                                        text-transform: uppercase;
-                                    ">
-                                        Return Seat
-                                    </div>
-
-                                    <div style="
-                                        margin-top: 6px;
-                                        font-size: 20px;
-                                        font-weight: bold;
-                                        color: #111827;
-                                    "
-                                         th:text="${booking.returnSeatNumber}">
-                                        F1
-                                    </div>
-
-                                    <div style="
-                                        margin-top: 4px;
-                                        color: #6b7280;
-                                        font-size: 12px;
-                                    ">
-                                        Return Flight
-                                    </div>
-
-                                </td>
-
-
-                                <td align="right"
-                                    style="
-                                        background-color: #f0fdf4;
-                                        padding: 18px;
-                                    ">
-
-                                    <div style="
-                                        color: #6b7280;
-                                        font-size: 12px;
-                                    ">
-                                        CABIN
-                                    </div>
-
-                                    <div style="
-                                        margin-top: 6px;
-                                        font-size: 16px;
-                                        font-weight: bold;
-                                        color: #111827;
-                                    "
-                                         th:text="${booking.cabin}">
-                                        Economy
-                                    </div>
-
-                                </td>
-
-                            </tr>
-
-                        </table>
-
-                    </td>
-
-                </tr>
 
 
                 <!-- ================================================= -->

@@ -1,6 +1,8 @@
 package com.example.application.booking.service;
 
 import com.example.application.booking.dto.BookingConfirmationDto;
+import com.example.application.booking.dto.PassengerRequest;
+import com.example.application.booking.entity.Passenger;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -56,6 +58,15 @@ public class EmailService {
         helper.setTo(
                 booking.getEmail()
         );
+
+        for (PassengerRequest passenger : booking.getPassengers()) {
+
+            if (!passenger.getEmail()
+                    .equals(booking.getEmail())) {
+
+                helper.addCc(passenger.getEmail());
+            }
+        }
 
 
         // Subject

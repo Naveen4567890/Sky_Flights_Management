@@ -13,6 +13,9 @@ import com.example.application.booking.repository.PassengerRepository;
 import com.example.application.flight.entity.Flight;
 import com.example.application.flight.repository.FlightRepository;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.transaction.Transactional;
 
 import lombok.RequiredArgsConstructor;
@@ -292,6 +295,8 @@ public class BookingService {
 
         Passenger primaryPassenger = null;
 
+        List<Passenger> passengers = new ArrayList<>();
+
         for (PassengerRequest passengerRequest :
                 request.getPassengers()) {
 
@@ -321,12 +326,6 @@ public class BookingService {
                     passengerRequest.getPhone()
             );
 
-            /*
-             * Passenger entity stores the onward seat.
-             *
-             * If your Passenger entity needs both onward
-             * and return seats, add a returnSeat field.
-             */
             passenger.setOnwardSeatNumber(
                     passengerRequest.getOnwardSeatNumber()
             );
@@ -338,16 +337,10 @@ public class BookingService {
                     passengerRequest.getCabin()
             );
 
-            passenger =
-                    passengerRepository.save(
-                            passenger
-                    );
+            passenger = passengerRepository.save(passenger);
 
+            passengers.add(passenger);
 
-            /*
-             * First passenger is the primary passenger
-             * for email/notification purposes.
-             */
             if (primaryPassenger == null) {
                 primaryPassenger = passenger;
             }
@@ -392,7 +385,8 @@ public class BookingService {
         BookingConfirmationDto confirmationDto =
                 convertToConfirmationDto(
                         booking,
-                        primaryPassenger
+                        primaryPassenger,
+                        passengers
                 );
 
 
@@ -470,7 +464,8 @@ public class BookingService {
 
     private BookingConfirmationDto convertToConfirmationDto(
             Booking booking,
-            Passenger passenger
+            Passenger passenger,
+            List<Passenger> passengers
     ) {
 
         if (passenger == null) {
@@ -479,6 +474,19 @@ public class BookingService {
                     "Primary passenger not found"
             );
         }
+
+        List<PassengerRequest> passengerDtos =
+                passengers.stream()
+                        .map(p -> PassengerRequest.builder()
+                                .firstName(p.getFirstName())
+                                .lastName(p.getLastName())
+                                .email(p.getEmail())
+                                .phone(p.getPhone())
+                                .onwardSeatNumber(p.getOnwardSeatNumber())
+                                .returnSeatNumber(p.getReturnSeatNumber())
+                                .cabin(p.getCabin())
+                                .build())
+                        .toList();
 
         Flight flight =
                 booking.getOnwardFlight();
@@ -523,6 +531,7 @@ public class BookingService {
                 .phone(
                         passenger.getPhone()
                 )
+                .passengers(passengerDtos)
 
 
                 // =================================================

@@ -31,8 +31,6 @@ public class Passenger {
     @Column(nullable = false)
     private String lastName;
 
-    private String gender;
-
     private LocalDate dateOfBirth;
 
     private String email;
