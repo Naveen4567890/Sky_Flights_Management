@@ -40,18 +40,11 @@ public class BookingService {
     private final NotificationService notificationService;
 
 
-    // ============================================================
-    // CREATE / CONFIRM BOOKING
-    // ============================================================
-
     @Transactional
     public CreateBookingResponse createBooking(
             CreateBookingRequest request
     ) {
 
-        // ========================================================
-        // 1. VALIDATE REQUEST
-        // ========================================================
 
         if (request == null) {
             throw new RuntimeException(
@@ -74,9 +67,7 @@ public class BookingService {
         }
 
 
-        // ========================================================
-        // 2. FIND ONWARD FLIGHT
-        // ========================================================
+
 
         Flight onwardFlight = flightRepository
                 .findById(request.getOnwardFlightId())
@@ -86,10 +77,6 @@ public class BookingService {
                         )
                 );
 
-
-        // ========================================================
-        // 3. FIND RETURN FLIGHT
-        // ========================================================
 
         Flight returnFlight = null;
 
@@ -113,9 +100,6 @@ public class BookingService {
                 request.getPassengers().size();
 
 
-        // ========================================================
-        // 5. CHECK FLIGHT AVAILABLE SEATS
-        // ========================================================
 
         if (onwardFlight.getAvailableSeats() == null
                 || onwardFlight.getAvailableSeats() < passengerCount) {
@@ -138,10 +122,6 @@ public class BookingService {
             }
         }
 
-
-        // ========================================================
-        // 6. VALIDATE ONWARD SEATS
-        // ========================================================
 
         Set<String> onwardSeats = new HashSet<>();
 
@@ -169,10 +149,6 @@ public class BookingService {
             }
         }
 
-
-        // ========================================================
-        // 7. VALIDATE RETURN SEATS
-        // ========================================================
 
         Set<String> returnSeats = new HashSet<>();
 
@@ -202,9 +178,7 @@ public class BookingService {
                 }
             }
         }
-    // ========================================================
-        // 8. CALCULATE TOTAL AMOUNT
-        // ========================================================
+
 
         BigDecimal onwardPrice =
                 onwardFlight.getPrice() != null
@@ -227,17 +201,9 @@ public class BookingService {
                         );
 
 
-        // ========================================================
-        // 9. GENERATE BOOKING REFERENCE / PNR
-        // ========================================================
-
         String bookingReference =
                 generateBookingReference();
 
-
-        // ========================================================
-        // 10. CREATE BOOKING
-        // ========================================================
 
         Booking booking = new Booking();
 
@@ -257,10 +223,7 @@ public class BookingService {
                 passengerCount
         );
 
-        /*
-         * Calculate the amount on the backend instead of
-         * trusting the frontend amount.
-         */
+
         booking.setTotalAmount(
                 totalAmount
         );
@@ -281,17 +244,8 @@ public class BookingService {
                 LocalDateTime.now()
         );
 
-
-        // ========================================================
-        // 11. SAVE BOOKING FIRST
-        // ========================================================
-
         booking = bookingRepository.save(booking);
 
-
-        // ========================================================
-        // 12. CREATE PASSENGER RECORDS
-        // ========================================================
 
         Passenger primaryPassenger = null;
 
@@ -347,9 +301,6 @@ public class BookingService {
         }
 
 
-        // ========================================================
-        // 13. REDUCE AVAILABLE FLIGHT SEATS
-        // ========================================================
 
         onwardFlight.setAvailableSeats(
                 onwardFlight.getAvailableSeats()
@@ -360,10 +311,6 @@ public class BookingService {
                 onwardFlight
         );
 
-
-        // ========================================================
-        // 14. REDUCE RETURN FLIGHT SEATS
-        // ========================================================
 
         if (returnFlight != null) {
 
@@ -377,11 +324,6 @@ public class BookingService {
             );
         }
 
-
-        // ========================================================
-        // 15. CREATE CONFIRMATION DTO
-        // ========================================================
-
         BookingConfirmationDto confirmationDto =
                 convertToConfirmationDto(
                         booking,
@@ -389,10 +331,6 @@ public class BookingService {
                         passengers
                 );
 
-
-        // ========================================================
-        // 16. SEND BOOKING CONFIRMATION
-        // ========================================================
 
         try {
 
@@ -402,20 +340,12 @@ public class BookingService {
 
         } catch (Exception e) {
 
-            /*
-             * Booking should not fail just because
-             * notification/email failed.
-             */
             System.err.println(
                     "Notification failed: "
                             + e.getMessage()
             );
         }
 
-
-        // ========================================================
-        // 17. RETURN RESPONSE
-        // ========================================================
 
         return new CreateBookingResponse(
 
@@ -429,10 +359,6 @@ public class BookingService {
         );
     }
 
-
-    // ============================================================
-    // GET BOOKING BY PNR
-    // ============================================================
 
     public Booking getBooking(
             String bookingReference
@@ -456,11 +382,6 @@ public class BookingService {
                         )
                 );
     }
-
-
-    // ============================================================
-    // CONVERT BOOKING → CONFIRMATION DTO
-    // ============================================================
 
     private BookingConfirmationDto convertToConfirmationDto(
             Booking booking,
@@ -503,9 +424,7 @@ public class BookingService {
 
         return BookingConfirmationDto.builder()
 
-                // =================================================
-                // BOOKING INFORMATION
-                // =================================================
+
 
                 .bookingId(
                         booking.getId()
@@ -516,9 +435,7 @@ public class BookingService {
                 )
 
 
-                // =================================================
-                // PASSENGER INFORMATION
-                // =================================================
+
 
                 .passengerName(
                         passengerName
@@ -534,9 +451,6 @@ public class BookingService {
                 .passengers(passengerDtos)
 
 
-                // =================================================
-                // FLIGHT INFORMATION
-                // =================================================
 
                 .airline(
                         flight.getAirline()
@@ -565,10 +479,6 @@ public class BookingService {
                 .arrivalTime(
                         flight.getArrivalTime()
                 )
-
-                // =================================================
-                // RETURN FLIGHT
-                // =================================================
 
                 .returnAirline(
                         returnFlight != null
@@ -613,11 +523,6 @@ public class BookingService {
                 )
 
 
-
-                // =================================================
-                // SEAT INFORMATION
-                // =================================================
-
                 .onwardSeatNumber(
                         passenger.getOnwardSeatNumber()
                 )
@@ -627,9 +532,6 @@ public class BookingService {
                 )
 
 
-                // =================================================
-                // CABIN
-                // =================================================
 
                 .cabin(
                         flight.getCabin() != null
@@ -637,10 +539,6 @@ public class BookingService {
                                 : passenger.getCabin()
                 )
 
-
-                // =================================================
-                // PAYMENT / BOOKING
-                // =================================================
 
                 .totalAmount(
                         booking.getTotalAmount()
@@ -654,9 +552,6 @@ public class BookingService {
     }
 
 
-    // ============================================================
-    // GENERATE BOOKING REFERENCE / PNR
-    // ============================================================
 
     private String generateBookingReference() {
 

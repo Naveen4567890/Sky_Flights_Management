@@ -26,22 +26,20 @@ public class EmailService {
             BookingConfirmationDto booking)
             throws MessagingException {
 
-        // Create Thymeleaf context
+
         Context context = new Context();
 
-        // Add booking object to template
+
         context.setVariable("booking", booking);
 
 
-        // Process HTML template
+
         String htmlContent =
                 templateEngine.process(
                         "booking-confirmation",
                         context
                 );
 
-
-        // Create email
         MimeMessage message =
                 mailSender.createMimeMessage();
 
@@ -54,7 +52,6 @@ public class EmailService {
                 );
 
 
-        // Recipient
         helper.setTo(
                 booking.getEmail()
         );

@@ -20,33 +20,6 @@ public class FlightController {
 
     private final FlightServiceImpl flightService;
 
-    //It will get the flights based on from , to, date , remaining details optional
-    /*@GetMapping("/search")
-    public List<FlightSearchResponse> searchFlights(@RequestParam String source,
-                                                    @RequestParam String destination,
-                                                    @RequestParam LocalDate date,
-
-                                                    @RequestParam(required = false) String airline,
-                                                    @RequestParam(required = false) String cabin,
-                                                    @RequestParam(required = false) Integer stops,
-                                                    @RequestParam(required = false) BigDecimal minPrice,
-                                                    @RequestParam(required = false) BigDecimal maxPrice
-                                                    ){
-
-        FlightSearchRequest request = new FlightSearchRequest();
-
-        request.setSource(source);
-        request.setDestination(destination);
-        request.setTravelDate(date);
-        request.setAirline(airline);
-        request.setCabin(cabin);
-        request.setStops(stops);
-        request.setMinPrice(minPrice);
-        request.setMaxPrice(maxPrice);
-
-        return flightService.searchFlight(request);
-
-    }*/
 
     //It will get the flight based on flight number
     @GetMapping("/flight-number/{flightNumber}")
