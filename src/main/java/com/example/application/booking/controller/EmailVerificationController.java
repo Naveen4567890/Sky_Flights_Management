@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/email")
+@RequestMapping("/api/auth")
 public class EmailVerificationController {
 
     private final EmailVerificationService

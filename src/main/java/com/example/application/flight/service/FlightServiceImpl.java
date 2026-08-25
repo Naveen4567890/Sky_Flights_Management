@@ -167,21 +167,5 @@ public class FlightServiceImpl implements FlightService{
 
         }
 
-//        if(request.getTraveller().getAdults()==0){
-//
-//            throw new RuntimeException(
-//                    "At least one adult is required");
-//
-//        }
-//
-//        if(request.getTraveller().getInfants() >
-//                request.getTraveller().getAdults()){
-//
-//            throw new RuntimeException(
-//                    "Infants cannot exceed adults");
-//
-//        }
-
-
     }
 }
