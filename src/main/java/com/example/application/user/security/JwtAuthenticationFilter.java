@@ -25,27 +25,6 @@ public class JwtAuthenticationFilter
 
 
     private final JwtService jwtService;
-
-
-    // ==========================================
-    // SKIP JWT FOR PUBLIC APIs
-    // ==========================================
-
-    @Override
-    protected boolean shouldNotFilter(
-            HttpServletRequest request
-    ) {
-
-        String path = request.getServletPath();
-
-        return path.startsWith("/api/auth/")
-                || path.startsWith("/api/flight/")
-                || path.startsWith("/api/payment/")
-                || path.startsWith("/api/booking/")
-                || path.startsWith("/error");
-    }
-
-
     // ==========================================
     // JWT FILTER
     // ==========================================

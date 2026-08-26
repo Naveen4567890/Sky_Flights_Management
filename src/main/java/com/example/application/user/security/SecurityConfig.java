@@ -61,27 +61,6 @@ public class SecurityConfig {
                                 "/ws/**"
                         ).permitAll()
 
-                        // FLIGHT
-                        .requestMatchers(
-                                "/api/flight/**"
-                        ).permitAll()
-
-                        // PAYMENT
-                        .requestMatchers(
-                                "/api/payment/**"
-                        ).permitAll()
-
-                        // BOOKING
-                        .requestMatchers(
-                                "/api/booking/**"
-                        ).permitAll()
-
-                        // OPTIONS / CORS PREFLIGHT
-                        .requestMatchers(
-                                HttpMethod.OPTIONS,
-                                "/**"
-                        ).permitAll()
-
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**")
                                 .permitAll()
 

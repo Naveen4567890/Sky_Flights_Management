@@ -367,7 +367,7 @@ public class FlightDataLoader implements CommandLineRunner {
              */
             price =
                     2500 +
-                            random.nextDouble() * 12500;
+                            random.nextDouble() * 12;
 
         } else {
 
@@ -377,7 +377,7 @@ public class FlightDataLoader implements CommandLineRunner {
              */
             price =
                     15000 +
-                            random.nextDouble() * 135000;
+                            random.nextDouble() * 13;
         }
 
         /*
