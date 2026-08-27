@@ -1,3 +1,4 @@
+
 package com.example.application.user.security;
 
 import org.springframework.context.annotation.Bean;
@@ -19,6 +20,7 @@ import java.util.List;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final OAuth2LoginSuccessHandler oAuth2SuccessHandler;

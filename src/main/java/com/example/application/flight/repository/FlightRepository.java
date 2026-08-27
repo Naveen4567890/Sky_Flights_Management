@@ -23,8 +23,8 @@ public interface FlightRepository extends JpaRepository<Flight, Long> {
         WHERE LOWER(f.source) = LOWER(:source)
         AND LOWER(f.destination) = LOWER(:destination)
         AND f.travelDate = :travelDate
+        AND f.cabin = :cabin
         AND (:airline IS NULL OR LOWER(f.airline) = LOWER(:airline))
-        AND (:cabin IS NULL OR LOWER(f.cabin) = LOWER(:cabin))
         AND (:stops IS NULL OR f.stops = :stops)
         AND (:minPrice IS NULL OR f.price >= :minPrice)
         AND (:maxPrice IS NULL OR f.price <= :maxPrice)
@@ -33,8 +33,8 @@ public interface FlightRepository extends JpaRepository<Flight, Long> {
           String source,
           String destination,
           LocalDate travelDate,
-          String airline,
           String cabin,
+          String airline,
           Integer stops,
           BigDecimal minPrice,
           BigDecimal maxPrice
