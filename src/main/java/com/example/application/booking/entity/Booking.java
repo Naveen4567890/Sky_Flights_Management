@@ -30,7 +30,6 @@ public class Booking {
     )
     private String bookingReference;
 
-    // Onward flight
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
             name = "onward_flight_id",
@@ -38,30 +37,29 @@ public class Booking {
     )
     private Flight onwardFlight;
 
-    // Return flight - nullable for one-way bookings
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
             name = "return_flight_id"
     )
     private Flight returnFlight;
 
-    // Number of passengers
+
     @Column(nullable = false)
     private Integer passengerCount;
 
-    // Total booking amount
+
     @Column(
             precision = 12,
             scale = 2
     )
     private BigDecimal totalAmount;
 
-    // Payment details
+
     private String paymentMethod;
 
     private String paymentId;
 
-    // BOOKED, CONFIRMED, CANCELLED, PENDING, etc.
     @Column(nullable = false)
     private String status;
 

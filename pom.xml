@@ -43,11 +43,9 @@
             <artifactId>spring-boot-starter-mail</artifactId>
         </dependency>
 
-        <!-- Twilio SMS -->
         <dependency>
-            <groupId>com.twilio.sdk</groupId>
-            <artifactId>twilio</artifactId>
-            <version>10.6.4</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-oauth2-client</artifactId>
         </dependency>
 
         <dependency>

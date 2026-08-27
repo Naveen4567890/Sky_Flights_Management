@@ -15,10 +15,9 @@ public class WebSocketConfig
     public void configureMessageBroker(
             MessageBrokerRegistry config) {
 
-        // Server -> Clients
+
         config.enableSimpleBroker("/topic");
 
-        // Client -> Server
         config.setApplicationDestinationPrefixes("/app");
     }
 

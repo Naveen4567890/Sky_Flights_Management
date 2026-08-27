@@ -25,11 +25,6 @@ public class BookingController {
 
     private final BookingService bookingService;
 
-
-    // ============================================================
-    // CREATE BOOKING
-    // ============================================================
-
     @Operation(
             summary = "Create a flight booking",
             description = """

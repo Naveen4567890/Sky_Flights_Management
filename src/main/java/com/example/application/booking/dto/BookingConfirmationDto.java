@@ -21,9 +21,6 @@ import java.util.List;
 )
 public class BookingConfirmationDto {
 
-    // ============================================================
-    // BOOKING
-    // ============================================================
 
     @Schema(
             description = "Unique booking ID",
@@ -38,10 +35,6 @@ public class BookingConfirmationDto {
     )
     private String bookingReference;
 
-
-    // ============================================================
-    // PASSENGER
-    // ============================================================
 
     @Schema(
             description = "Primary passenger name",
@@ -62,11 +55,6 @@ public class BookingConfirmationDto {
             example = "+919876543210"
     )
     private String phone;
-
-
-    // ============================================================
-    // ONWARD FLIGHT
-    // ============================================================
 
     @Schema(
             description = "Airline operating the onward flight",
@@ -117,9 +105,6 @@ public class BookingConfirmationDto {
     private LocalDateTime arrivalTime;
 
 
-    // ============================================================
-    // RETURN FLIGHT
-    // ============================================================
 
     @Schema(
             description = "Return flight airline",
@@ -170,10 +155,6 @@ public class BookingConfirmationDto {
     private LocalDateTime returnArrivalTime;
 
 
-    // ============================================================
-    // SEATS
-    // ============================================================
-
     @Schema(
             description = "Selected seat on the onward flight",
             example = "12A"
@@ -187,10 +168,6 @@ public class BookingConfirmationDto {
     )
     private String returnSeatNumber;
 
-
-    // ============================================================
-    // BOOKING
-    // ============================================================
 
     @Schema(
             description = "Cabin class",

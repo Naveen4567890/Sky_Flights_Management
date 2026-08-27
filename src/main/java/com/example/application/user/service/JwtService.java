@@ -19,10 +19,6 @@ public class JwtService {
     @Value("${jwt.expiration}")
     private long expiration;
 
-    // ==========================================
-    // SECRET KEY
-    // ==========================================
-
     private SecretKey getSigningKey() {
 
         return Keys.hmacShaKeyFor(
@@ -31,10 +27,6 @@ public class JwtService {
                 )
         );
     }
-
-    // ==========================================
-    // GENERATE TOKEN
-    // ==========================================
 
     public String generateToken(String email) {
 
@@ -60,10 +52,6 @@ public class JwtService {
                 .compact();
     }
 
-    // ==========================================
-    // EXTRACT EMAIL
-    // ==========================================
-
     public String extractEmail(String token) {
 
         Claims claims =
@@ -81,10 +69,6 @@ public class JwtService {
 
         return claims.getSubject();
     }
-
-    // ==========================================
-    // VALIDATE TOKEN
-    // ==========================================
 
     public boolean isTokenValid(String token) {
 
